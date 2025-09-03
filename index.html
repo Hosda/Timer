@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagem Regressiva para 5 de Dezembro de 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            overflow-x: hidden;
+            background: url('https://drive.google.com/thumbnail?id=1KlCXXFEitukqIEXvCVcGXIpFmfJwlZo7&sz=w2000') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+        
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            max-width: 650px;
+            width: 90%;
+            z-index: 2;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            z-index: -1;
+            background: linear-gradient(45deg, #ff0000, #ff9900, #ffcc00, #ff9900, #ff0000);
+            background-size: 400%;
+            border-radius: 25px;
+            animation: glowing 20s linear infinite;
+            opacity: 0.2;
+        }
+        
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7);
+            color: #ffcc00;
+        }
+        
+        .contador {
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 35px 0;
+            color: #ffffff;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(to right, #ff2200, #ff0004, #ff00d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .data-alvo {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            color: #ffffff;
+        }
+        
+        .mensagem {
+            font-size: 1.3rem;
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 15px;
+            line-height: 1.7;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+        
+        .emoji {
+            font-size: 4rem;
+            margin: 20px 0;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.6));
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 700px) {
+            h1 { font-size: 2.2rem; }
+            .contador { font-size: 3.5rem; }
+            .data-alvo { font-size: 1.4rem; }
+            .mensagem { font-size: 1.1rem; }
+            .emoji { font-size: 3rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .container { padding: 25px; }
+            h1 { font-size: 1.8rem; }
+            .contador { font-size: 2.8rem; }
+            .data-alvo { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="contador" id="contador">Calculando...</div>
+        <div class="data-alvo">Para 5 de Dezembro de 2025</div>
+        <div class="mensagem">
+            <p>Só mais <span id="dias-destaque"></span> dias para eu te ver minha linda</p>
+        </div>
+    </div>
+
+    <script>
+        function atualizarContagem() {
+            // Data alvo: 5 de dezembro de 2025
+            const dataAlvo = new Date('2025-12-05T00:00:00');
+            const agora = new Date();
+            
+            // Calcula a diferença em milissegundos
+            const diferenca = dataAlvo - agora;
+            
+            // Converte para dias
+            const dias = Math.ceil(diferenca / (1000 * 60 * 60 * 24));
+            
+            // Atualiza o elemento HTML
+            const contadorElemento = document.getElementById('contador');
+            const diasDestaque = document.getElementById('dias-destaque');
+            const emojiElemento = document.getElementById('emoji');
+            
+            if (diferenca > 0) {
+                contadorElemento.textContent = `${dias} ${dias === 1 ? 'dia' : 'dias'}`;
+                diasDestaque.textContent = `${dias} ${dias === 1 ? 'dia' : 'dias'}`;
+                
+                // Muda o emoji baseado na quantidade de dias
+                if (dias > 180) {
+                    emojiElemento.textContent = '📅';
+                } else if (dias > 30) {
+                    emojiElemento.textContent = '⏳';
+                } else if (dias > 7) {
+                    emojiElemento.textContent = '📆';
+                } else if (dias > 1) {
+                    emojiElemento.textContent = '🎉';
+                } else if (dias === 1) {
+                    emojiElemento.textContent = '🔥';
+                }
+            } else if (diferenca === 0) {
+                contadorElemento.textContent = "É hoje!";
+                diasDestaque.textContent = "0 dias";
+                emojiElemento.textContent = '🎊';
+            } else {
+                contadorElemento.textContent = "A data já passou!";
+                diasDestaque.textContent = "0 dias";
+                emojiElemento.textContent = '✅';
+            }
+        }
+        
+        // Atualiza imediatamente e depois a cada minuto
+        atualizarContagem();
+        setInterval(atualizarContagem, 60000);
+    </script>
+</body>
+</html>
